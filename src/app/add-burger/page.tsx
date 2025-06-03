@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+
 import { supabase } from "@/backend/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ImageDropzone } from "@/components/ui/image-dropzone";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "sonner";
 
 export default function AddBurger() {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
@@ -111,8 +112,9 @@ export default function AddBurger() {
 
       if (insertError) throw insertError;
 
-      toast.success("Burger review posted successfully!");
-      router.push("/");
+      router.push(
+        `/?success=true&burgerName=${encodeURIComponent(burgerName)}`
+      );
       router.refresh();
     } catch (error) {
       console.error("Error submitting burger:", error);
