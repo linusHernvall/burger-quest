@@ -5,10 +5,10 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { supabase } from "@/backend/supabase/client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { ImageDropzone } from "@/components/ui/image-dropzone";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/button";
+import { Input } from "@/components/input";
+import { ImageDropzone } from "@/components/image-dropzone";
+import { Textarea } from "@/components/textarea";
 
 export default function AddBurger() {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);

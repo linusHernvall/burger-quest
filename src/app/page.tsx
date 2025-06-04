@@ -5,7 +5,9 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { toast } from "sonner";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/button";
+import CardGrid from "@/components/cardGrid";
+import BurgerCard from "@/components/burgerCard";
 
 export default function Home() {
   const searchParams = useSearchParams();
@@ -41,12 +43,18 @@ export default function Home() {
     <>
       <div className="mx-auto max-w-5xl py-10 px-4 md:py-20">
         <h1 className="text-4xl pb-8 font-bold">Welcome to Burger Quest!</h1>
-        <p className=" pb-4 text-gray-500">
+        <p className="pb-4 text-gray-500">
           Watch a burger battle unfold as we try to find the best burger.
         </p>
         <Link href="/add-burger">
           <Button className="cursor-pointer">Add Burger</Button>
         </Link>
+        <BurgerCard
+          burgerName="Burger Name"
+          restaurantName="Restaurant Name"
+          rating={8}
+          image="https://www.corsair.com/corsairmedia/sys_master/productcontent/CH-9300011-NA-M65_PRO_RGB_BLK_04.png"
+        />
       </div>
     </>
   );
