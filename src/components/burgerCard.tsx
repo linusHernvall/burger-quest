@@ -5,15 +5,15 @@ import Image from "next/image";
 import burgerImage from "public/frisco.png";
 
 interface BurgerCardProps {
-  burgerName: string;
-  restaurantName: string;
+  burger: string;
+  restaurant: string;
   rating: number;
   image: string;
 }
 
 export default function BurgerCard({
-  burgerName,
-  restaurantName,
+  burger,
+  restaurant,
   rating,
   image,
 }: BurgerCardProps) {
@@ -34,11 +34,11 @@ export default function BurgerCard({
 
         <div className="relative  flex flex-col justify-center items-center z-10">
           <p className="text-white text-2xl font-bold uppercase tracking-wider">
-            Burger Name
+            {burger}
           </p>
-          <p className="text-white text-lg  tracking-wider">Restaurant Name</p>
+          <p className="text-white text-lg  tracking-wider">{restaurant}</p>
           <p className="text-white text-2xl font-bold tracking-wider pt-2">
-            8/10
+            {rating}/10
           </p>
           <Link href="/">
             <Button className="relative cursor-pointer mt-4 top-0 opacity-100 px-[32px] py-[16px] text-black no-underline bg-[#ffce00] rounded-lg uppercase tracking-wider transition-all duration-500 lg:top-[100px] lg:group-hover:top-0 lg:group-hover:opacity-100">
