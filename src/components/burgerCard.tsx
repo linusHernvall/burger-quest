@@ -25,9 +25,11 @@ export default function BurgerCard({
 
         <div className="relative flex justify-center items-center pt-5 z-10">
           <Image
-            src={burgerImage}
-            alt="Burger image"
-            className="h-68 w-68 transition-all duration-500 group-hover:scale-150 "
+            src={image}
+            alt={`A tasty ${burger} burger.`}
+            className="h-[272px] w-[272px]transition-all duration-500 group-hover:scale-150"
+            width={272}
+            height={272}
             priority
           />
         </div>
@@ -36,7 +38,7 @@ export default function BurgerCard({
           <p className="text-white text-2xl font-bold uppercase tracking-wider">
             {burger}
           </p>
-          <p className="text-white text-lg  tracking-wider">{restaurant}</p>
+          <p className="text-white text-lg tracking-wider">{restaurant}</p>
           <p className="text-white text-2xl font-bold tracking-wider pt-2">
             {rating}/10
           </p>
