@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { Button } from "./button";
 import Image from "next/image";
+import burgerImage from "public/frisco.png";
 
 interface BurgerCardProps {
   burgerName: string;
@@ -22,16 +23,12 @@ export default function BurgerCard({
         {/* ::before effect */}
         <div className="absolute top-[-50%] w-full h-full bg-[#ffce00] skew-y-[345deg] transition-all duration-500 group-hover:top-[-70%] group-hover:skew-y-[390deg] z-0" />
 
-        {/* ::after effect */}
-        {/* <div className="absolute bottom-0 left-6 font-semibold text-[5em] text-black/10 z-0">
-          BQ
-        </div> */}
-
         <div className="relative flex justify-center items-center pt-5 z-10">
-          <img
-            src="https://www.corsair.com/corsairmedia/sys_master/productcontent/CH-9300011-NA-M65_PRO_RGB_BLK_04.png"
-            alt="mouse corsair"
-            className="h-[272px] w-auto transition-all duration-500 group-hover:max-w-[50%]"
+          <Image
+            src={burgerImage}
+            alt="Burger image"
+            className="h-68 w-68 transition-all duration-500 group-hover:scale-150 "
+            priority
           />
         </div>
 
@@ -44,7 +41,7 @@ export default function BurgerCard({
             8/10
           </p>
           <Link href="/">
-            <Button className="relative cursor-pointer mt-4 top-[100px] opacity-0 px-[30px] py-[10px] text-black no-underline bg-[#ffce00] rounded-lg uppercase tracking-wider transition-all duration-500 group-hover:top-0 group-hover:opacity-100">
+            <Button className="relative cursor-pointer mt-4 top-0 opacity-100 px-[32px] py-[16px] text-black no-underline bg-[#ffce00] rounded-lg uppercase tracking-wider transition-all duration-500 lg:top-[100px] lg:group-hover:top-0 lg:group-hover:opacity-100">
               Read more
             </Button>
           </Link>
