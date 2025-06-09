@@ -11,7 +11,7 @@ export default function Home() {
       <p className="pb-4">
         Watch a burger battle unfold as we try to find the best burger.
       </p>
-      <Link href="/add-burger">
+      <Link href="add-burger">
         <Button className="cursor-pointer">Add Burger</Button>
       </Link>
       <ToastClientWrapper />

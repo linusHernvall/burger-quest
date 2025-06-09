@@ -4,6 +4,7 @@ import { Button } from "./button";
 import Image from "next/image";
 
 interface BurgerCardProps {
+  id: string;
   burger: string;
   restaurant: string;
   rating: number;
@@ -11,6 +12,7 @@ interface BurgerCardProps {
 }
 
 export default function BurgerCard({
+  id,
   burger,
   restaurant,
   rating,
@@ -41,8 +43,8 @@ export default function BurgerCard({
           <p className="text-white text-2xl font-bold tracking-wider pt-2">
             {rating}/10
           </p>
-          <Link href="/">
-            <Button className="relative cursor-pointer mt-4 top-0 opacity-100 px-[32px] py-[16px] text-black no-underline rounded-lg uppercase tracking-wider transition-all duration-500 lg:top-[100px] lg:group-hover:top-0 lg:group-hover:opacity-100">
+          <Link href={`/burger/${id}`}>
+            <Button className="relative cursor-pointer mt-4 top-0 opacity-100 px-[32px] py-[16px] text-black no-underline rounded-lg capitalize tracking-wider transition-all duration-500 lg:top-[100px] lg:group-hover:top-0 lg:group-hover:opacity-100">
               Read more
             </Button>
           </Link>

@@ -16,6 +16,7 @@ export default async function CardGrid() {
         .map((burger) => (
           <BurgerCard
             key={burger.id}
+            id={burger.id}
             burger={burger.burger_name}
             restaurant={burger.restaurant}
             rating={burger.rating}
