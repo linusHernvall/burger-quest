@@ -11,15 +11,17 @@ export default async function CardGrid() {
 
   return (
     <div className="pt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {burgers?.map((burger) => (
-        <BurgerCard
-          key={burger.id}
-          burger={burger.burger_name}
-          restaurant={burger.restaurant}
-          rating={burger.rating}
-          image={burger.image_url}
-        />
-      ))}
+      {burgers
+        ?.sort((a, b) => b.id - a.id)
+        .map((burger) => (
+          <BurgerCard
+            key={burger.id}
+            burger={burger.burger_name}
+            restaurant={burger.restaurant}
+            rating={burger.rating}
+            image={burger.image_url}
+          />
+        ))}
     </div>
   );
 }

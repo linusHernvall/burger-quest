@@ -2,7 +2,6 @@ import Link from "next/link";
 
 import { Button } from "./button";
 import Image from "next/image";
-import burgerImage from "public/frisco.png";
 
 interface BurgerCardProps {
   burger: string;
@@ -19,7 +18,7 @@ export default function BurgerCard({
 }: BurgerCardProps) {
   return (
     <div>
-      <div className="relative w-[320px] h-[480px] bg-[#404040] rounded-lg overflow-hidden group">
+      <div className="relative h-[480px] bg-[#404040] rounded-lg overflow-hidden group">
         {/* ::before effect */}
         <div className="absolute top-[-50%] w-full h-full bg-[#ffce00] skew-y-[345deg] transition-all duration-500 group-hover:top-[-70%] group-hover:skew-y-[390deg] z-0" />
 
