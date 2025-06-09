@@ -41,7 +41,7 @@ export function ImageDropzone({ onChange, className }: ImageDropzoneProps) {
         "border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors",
         isDragActive
           ? "border-primary bg-primary/10"
-          : "border-gray-300 hover:border-primary",
+          : "border-background hover:border-primary",
         className
       )}
     >
@@ -53,14 +53,12 @@ export function ImageDropzone({ onChange, className }: ImageDropzoneProps) {
             alt="Preview"
             className="max-h-48 mx-auto rounded-lg object-contain"
           />
-          <p className="text-sm text-gray-500">
-            Click or drag to replace image
-          </p>
+          <p className="text-sm">Click or drag to replace image</p>
         </div>
       ) : (
         <div className="space-y-2">
           <p className="text-lg font-medium">Drag & drop your image here</p>
-          <p className="text-sm text-gray-500">or click to select an image</p>
+          <p className="text-sm">or click to select an image</p>
         </div>
       )}
     </div>

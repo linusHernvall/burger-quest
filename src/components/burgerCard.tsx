@@ -20,7 +20,7 @@ export default function BurgerCard({
     <div>
       <div className="relative h-[480px] bg-[#404040] rounded-lg overflow-hidden group">
         {/* ::before effect */}
-        <div className="absolute top-[-50%] w-full h-full bg-[#ffce00] skew-y-[345deg] transition-all duration-500 group-hover:top-[-70%] group-hover:skew-y-[390deg] z-0" />
+        <div className="absolute top-[-50%] w-full h-full bg-primary skew-y-[345deg] transition-all duration-500 group-hover:top-[-70%] group-hover:skew-y-[390deg] z-0" />
 
         <div className="relative flex justify-center items-center pt-5 z-10">
           <Image
@@ -42,7 +42,7 @@ export default function BurgerCard({
             {rating}/10
           </p>
           <Link href="/">
-            <Button className="relative cursor-pointer mt-4 top-0 opacity-100 px-[32px] py-[16px] text-black no-underline bg-[#ffce00] rounded-lg uppercase tracking-wider transition-all duration-500 lg:top-[100px] lg:group-hover:top-0 lg:group-hover:opacity-100">
+            <Button className="relative cursor-pointer mt-4 top-0 opacity-100 px-[32px] py-[16px] text-black no-underline rounded-lg uppercase tracking-wider transition-all duration-500 lg:top-[100px] lg:group-hover:top-0 lg:group-hover:opacity-100">
               Read more
             </Button>
           </Link>
