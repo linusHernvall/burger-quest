@@ -28,7 +28,7 @@ export default function BurgerCard({
           <Image
             src={image}
             alt={`A tasty ${burger} burger.`}
-            className="h-[272px] w-[272px]transition-all duration-500 group-hover:scale-150"
+            className="h-[272px] w-[272px]transition-all duration-500 group-hover:scale-150 lg:sepia lg:group-hover:sepia-0"
             width={272}
             height={272}
             priority
