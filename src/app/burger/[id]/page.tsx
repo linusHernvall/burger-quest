@@ -43,21 +43,15 @@ export default async function BurgerPage({ params }: BurgerPageProps) {
     return <p className="text-red-500">No burgers found.</p>;
   }
 
-  // Get the highest rated burger (first one after sorting)
-  const highestRatedBurger = allBurgers[0];
-  const isHighestRated = String(highestRatedBurger.id) === String(id);
+  // Get the highest rating
+  const highestRating = allBurgers[0].rating;
 
-  console.log("Current burger:", { id: burger.id, rating: burger.rating });
-  console.log("Highest rated burger:", {
-    id: highestRatedBurger.id,
-    rating: highestRatedBurger.rating,
-  });
-  console.log("Is highest rated:", isHighestRated);
-  console.log("ID comparison:", {
-    currentId: String(id),
-    highestId: String(highestRatedBurger.id),
-    areEqual: String(highestRatedBurger.id) === String(id),
-  });
+  // Count how many burgers have the highest rating
+  const highestRatedBurgers = allBurgers.filter(
+    (b) => b.rating === highestRating
+  );
+  const isHighestRated = burger.rating === highestRating;
+  const isUniqueHighest = isHighestRated && highestRatedBurgers.length === 1;
 
   const formattedDate = new Date(burger.created_at).toISOString().slice(0, 10);
 
@@ -82,10 +76,25 @@ export default async function BurgerPage({ params }: BurgerPageProps) {
           <div className="absolute inset-0 border-8 border-primary opacity-50"></div>
           {isHighestRated && (
             <div className="absolute top-4 right-4 transform rotate-12 z-20">
-              <div className="bg-yellow-400 text-black font-bold px-4 py-2 rounded-full shadow-lg border-2 border-yellow-600 flex items-center gap-2">
-                <span className="text-2xl">⭐</span>
-                <span className="text-lg">Sheriff</span>
-              </div>
+              {isUniqueHighest ? (
+                <Image
+                  src="/sheriff.png"
+                  alt="Sheriff badge"
+                  width={96}
+                  height={96}
+                  className="h-[96px] w-[96px] drop-shadow-lg"
+                  priority
+                />
+              ) : (
+                <Image
+                  src="/deputy.png"
+                  alt="Deputy Sheriff badge"
+                  width={96}
+                  height={96}
+                  className="drop-shadow-lg"
+                  priority
+                />
+              )}
             </div>
           )}
         </div>

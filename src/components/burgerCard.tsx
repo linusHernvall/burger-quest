@@ -10,6 +10,7 @@ interface BurgerCardProps {
   rating: number;
   image: string;
   isHighestRated: boolean;
+  isUniqueHighest: boolean;
 }
 
 export default function BurgerCard({
@@ -19,6 +20,7 @@ export default function BurgerCard({
   rating,
   image,
   isHighestRated,
+  isUniqueHighest,
 }: BurgerCardProps) {
   return (
     <div>
@@ -36,16 +38,31 @@ export default function BurgerCard({
             priority
           />
           {isHighestRated && (
-            <div className="absolute top-2 right-2 transform rotate-12">
-              <div className="bg-yellow-400 text-black font-bold px-3 py-1 rounded-full shadow-lg border-2 border-yellow-600 flex items-center gap-1">
-                <span className="text-lg">⭐</span>
-                <span>Sheriff</span>
-              </div>
+            <div className="absolute top-4 right-4 transform rotate-12 z-20">
+              {isUniqueHighest ? (
+                <Image
+                  src="/sheriff.png"
+                  alt="Sheriff badge"
+                  width={80}
+                  height={80}
+                  className="h-[80px] w-[80px] drop-shadow-lg"
+                  priority
+                />
+              ) : (
+                <Image
+                  src="/deputy.png"
+                  alt="Deputy Sheriff badge"
+                  width={80}
+                  height={80}
+                  className="h-[80px] w-[80px] drop-shadow-lg"
+                  priority
+                />
+              )}
             </div>
           )}
         </div>
 
-        <div className="relative  flex flex-col justify-center items-center z-10">
+        <div className="relative flex flex-col justify-center items-center z-10">
           <p className="text-white text-2xl font-bold uppercase tracking-wider">
             {burger}
           </p>
