@@ -70,9 +70,11 @@ export default async function BurgerPage({ params }: BurgerPageProps) {
                   Edit burger
                 </Button>
               </Link>
-              <Button className="bg-red-800 text-white min-w-[50%] px-6 py-2 rounded-lg hover:bg-red-900">
-                Delete
-              </Button>
+              <Link href={`/delete-burger/${id}`}>
+                <Button className="bg-red-800 text-white min-w-[50%] px-6 py-2 rounded-lg hover:bg-red-900">
+                  Delete
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
