@@ -148,7 +148,7 @@ export default function EditBurger({ params }: PageProps) {
 
       if (updateError) throw updateError;
 
-      toast.success("Burger updated successfully!");
+      toast.success(`${burgerName} updated successfully!`);
       router.push("/");
       router.refresh();
     } catch (error) {

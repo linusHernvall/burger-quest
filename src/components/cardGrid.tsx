@@ -9,6 +9,12 @@ export default async function CardGrid() {
     return <p className="text-red-500">Failed to load burgers.</p>;
   }
 
+  // Find the highest rated burger
+  const highestRatedBurger = burgers?.reduce(
+    (highest, current) => (current.rating > highest.rating ? current : highest),
+    burgers[0]
+  );
+
   return (
     <div className="pt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {burgers
@@ -21,6 +27,7 @@ export default async function CardGrid() {
             restaurant={burger.restaurant}
             rating={burger.rating}
             image={burger.image_url}
+            isHighestRated={highestRatedBurger?.id === burger.id}
           />
         ))}
     </div>

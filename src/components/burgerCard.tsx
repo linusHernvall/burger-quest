@@ -9,6 +9,7 @@ interface BurgerCardProps {
   restaurant: string;
   rating: number;
   image: string;
+  isHighestRated: boolean;
 }
 
 export default function BurgerCard({
@@ -17,6 +18,7 @@ export default function BurgerCard({
   restaurant,
   rating,
   image,
+  isHighestRated,
 }: BurgerCardProps) {
   return (
     <div>
@@ -33,6 +35,14 @@ export default function BurgerCard({
             height={272}
             priority
           />
+          {isHighestRated && (
+            <div className="absolute top-2 right-2 transform rotate-12">
+              <div className="bg-yellow-400 text-black font-bold px-3 py-1 rounded-full shadow-lg border-2 border-yellow-600 flex items-center gap-1">
+                <span className="text-lg">⭐</span>
+                <span>Sheriff</span>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="relative  flex flex-col justify-center items-center z-10">
