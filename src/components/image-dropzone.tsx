@@ -7,10 +7,17 @@ import { cn } from "@/lib/utils";
 interface ImageDropzoneProps {
   onChange: (file: File) => void;
   className?: string;
+  existingImageUrl?: string | null;
 }
 
-export function ImageDropzone({ onChange, className }: ImageDropzoneProps) {
-  const [preview, setPreview] = useState<string | null>(null);
+export function ImageDropzone({
+  onChange,
+  className,
+  existingImageUrl,
+}: ImageDropzoneProps) {
+  const [preview, setPreview] = useState<string | null>(
+    existingImageUrl || null
+  );
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
