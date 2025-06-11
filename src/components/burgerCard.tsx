@@ -63,7 +63,7 @@ export default function BurgerCard({
         </div>
 
         <div className="relative flex flex-col justify-center items-center z-10">
-          <p className="text-white text-2xl font-bold uppercase tracking-wider">
+          <p className="text-white text-2xl font-rye font-bold uppercase tracking-wider">
             {burger}
           </p>
           <p className="text-white text-lg tracking-wider">{restaurant}</p>

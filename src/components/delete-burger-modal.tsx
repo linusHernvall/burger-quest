@@ -1,51 +1,36 @@
-"use client";
-
-import { useEffect, useState, use } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { supabase } from "@/backend/supabase/client";
 import { Button } from "@/components/button";
 
-interface PageProps {
-  params: Promise<{ id: string }>;
+interface DeleteBurgerModalProps {
+  burgerId: string;
+  burgerName: string;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-export default function DeleteBurger({ params }: PageProps) {
-  const { id } = use(params);
+export function DeleteBurgerModal({
+  burgerId,
+  burgerName,
+  isOpen,
+  onClose,
+}: DeleteBurgerModalProps) {
   const [isDeleting, setIsDeleting] = useState(false);
-  const [burgerName, setBurgerName] = useState<string>("");
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchBurger = async () => {
-      try {
-        const { data, error } = await supabase
-          .from("burgers")
-          .select("burger_name")
-          .eq("id", id)
-          .single();
-
-        if (error) throw error;
-        if (!data) throw new Error("Burger not found");
-
-        setBurgerName(data.burger_name);
-      } catch (error) {
-        console.error("Error fetching burger:", error);
-        toast.error("Failed to load burger data");
-        router.push("/");
-      }
-    };
-
-    fetchBurger();
-  }, [id, router]);
+  if (!isOpen) return null;
 
   const handleDelete = async () => {
     setIsDeleting(true);
 
     try {
-      // Delete the burger from the database
-      const { error } = await supabase.from("burgers").delete().eq("id", id);
+      const { error } = await supabase
+        .from("burgers")
+        .delete()
+        .eq("id", burgerId);
 
       if (error) throw error;
 
@@ -57,12 +42,13 @@ export default function DeleteBurger({ params }: PageProps) {
       toast.error("Failed to delete burger. Please try again.");
     } finally {
       setIsDeleting(false);
+      onClose();
     }
   };
 
   return (
-    <div className="mx-auto max-w-5xl py-10 px-4 md:py-20">
-      <div className="bg-background/50 backdrop-blur-sm rounded-lg shadow-lg p-8 border-8 border-primary">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+      <div className="bg-background/50 backdrop-blur-sm rounded-lg shadow-lg p-8 border-8 border-primary max-w-md w-full mx-4">
         <h1 className="text-4xl pb-8 font-bold text-red-600">Delete Burger</h1>
         <p className="text-xl mb-8">
           Are you sure you want to delete{" "}
@@ -79,7 +65,7 @@ export default function DeleteBurger({ params }: PageProps) {
           </Button>
           <Button
             className="bg-gray-600 hover:bg-gray-700 text-white"
-            onClick={() => router.back()}
+            onClick={onClose}
             disabled={isDeleting}
           >
             Cancel
