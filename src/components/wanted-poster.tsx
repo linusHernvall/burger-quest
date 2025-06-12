@@ -29,52 +29,63 @@ export function WantedPoster({
       className="relative w-full max-w-2xl mx-auto aspect-[3/4] flex flex-col items-center justify-between p-0 bg-contain bg-no-repeat bg-center "
       style={{ backgroundImage: "url('/wanted-poster.png')" }}
     >
-      <div className="flex flex-col items-center w-full pt-20 px-6">
-        <h1 className="text-4xl md:text-5xl text-black text-center mb-2">
+      <div className="flex flex-col items-center w-full pt-16 md:pt-20 px-2 sm:px-12 lg:px-8">
+        <h1 className="text-4xl md:text-6xl text-black text-center">
           {burgerName.toUpperCase()}
         </h1>
-        <p
-          className="text-xl md:text-3xl text-center mb-2 text-black"
-          style={{ fontFamily: "var(--font-rye)" }}
-        >
-          {restaurant}
-        </p>
+        <div className="flex flex-row items-center w-full px-8 gap-2">
+          <div className="w-full h-0.5 bg-black mb-2"></div>
+          <p
+            className="text-2xl md:text-4xl text-center mb-2 text-black w-fit whitespace-nowrap"
+            style={{ fontFamily: "var(--font-rye)" }}
+          >
+            {restaurant}
+          </p>
+          <div className="w-full h-0.5 bg-black mb-2"></div>
+        </div>
+        <div className="flex flex-col items-center px-6">
+          <Image src="/banner.png" alt="Banner" width={160} height={8} />
+        </div>
         {/* <div className="text-base text-center italic mb-2">
           Last seen: {createdAt}
         </div> */}
       </div>
       <div className="flex flex-col items-center w-full px-6">
-        <div className="relative w-full flex justify-center my-2">
-          <div className="relative w-64 h-40 md:w-80 md:h-52 lg:w-160 lg:h-128">
+        <div className="relative w-full flex justify-center">
+          <div className="relative w-64 h-40 sm:w-120 sm:h-96 lg:w-160 lg:h-128">
             <Image
               src={imageUrl}
               alt={`Burger: ${burgerName}`}
+              className="object-contain drop-shadow-xl "
               fill
-              className="object-contain drop-shadow-xl rounded-md"
-              priority
+              sizes="(max-width: 640px) 256px, (max-width: 1024px) 480px, 640px"
             />
           </div>
           {isHighestRated && (
-            <div className="absolute top-0 right-16 transform rotate-12 z-20">
+            <div className="absolute top-0 right-0 sm:top-0 sm:right-16 transform rotate-12 z-20">
               <Image
                 src={isUniqueHighest ? "/sheriff.png" : "/deputy.png"}
                 alt={isUniqueHighest ? "Sheriff badge" : "Deputy badge"}
                 width={64}
                 height={64}
-                className="drop-shadow-lg lg:w-24 lg:h-24"
+                className="drop-shadow-lg sm:w-24 sm:h-24"
                 priority
               />
             </div>
           )}
         </div>
       </div>
-      <div className="flex flex-col items-center w-full px-6 mt-2">
-        <h2 className="text-3xl text-black mb-2 text-center">Beskrivning</h2>
+      <div className="flex flex-col items-center w-full px-6">
+        <h2 className="text-xl sm:text-4xl md:text-3xl text-black mb-2 text-center">
+          Beskrivning
+        </h2>
         <p className="text-base text-black text-center mb-8">{description}</p>
       </div>
       <div className="flex flex-col items-center w-full px-6 mb-10">
-        <p className="text-2xl text-black mb-1">Betyg</p>
-        <p className="text-3xl text-black mb-2">★ {rating} av 10 ★</p>
+        <p className="text-lg sm:text-2xl md:text-3xl text-black mb-1">Betyg</p>
+        <p className="text-xl sm:text-3xl md:text-4xl text-black mb-2">
+          ★ {rating} av 10 ★
+        </p>
         <AdminActions burgerId={burgerId} burgerName={burgerName} />
       </div>
     </div>
