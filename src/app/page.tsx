@@ -1,7 +1,5 @@
-import Link from "next/link";
-
-import { Button } from "@/components/button";
 import CardGrid from "@/components/cardGrid";
+import { AddBurgerButton } from "@/components/add-burger-button";
 import ToastClientWrapper from "@/components/toastClientWrapper";
 
 export default function Home() {
@@ -11,9 +9,7 @@ export default function Home() {
       <p className="pb-4">
         Watch a burger battle unfold as we try to find the best burger.
       </p>
-      <Link href="add-burger">
-        <Button className="cursor-pointer">Add Burger</Button>
-      </Link>
+      <AddBurgerButton />
       <ToastClientWrapper />
       <CardGrid />
     </div>

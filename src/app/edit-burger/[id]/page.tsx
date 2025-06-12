@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { use } from "react";
 
 import { supabase } from "@/backend/supabase/client";
+import { useAuth } from "@/context/auth-context";
 import { Button } from "@/components/button";
 import { Input } from "@/components/input";
 import { ImageDropzone } from "@/components/image-dropzone";
@@ -26,11 +27,23 @@ interface PageProps {
 
 export default function EditBurger({ params }: PageProps) {
   const { id } = use(params);
+  const { isAuthenticated } = useAuth();
   const [burger, setBurger] = useState<Burger | null>(null);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      toast.error("You must be logged in to edit a burger");
+      router.push("/login");
+    }
+  }, [isAuthenticated, router]);
+
+  if (!isAuthenticated) {
+    return null;
+  }
 
   // Fetch burger data when component mounts
   useEffect(() => {

@@ -1,14 +1,36 @@
+"use client";
+
 import Link from "next/link";
+import { useAuth } from "@/context/auth-context";
+import { Button } from "./button";
 
 export default function Header() {
+  const { isAuthenticated, logout } = useAuth();
+
   return (
-    <header className="bg-white shadow-sm">
-      <div className="max-w-5xl mx-auto px-4 py-4 xl:container">
-        <Link href="/">
-          <p className="text-2xl text-black font-bold cursor-pointer">
+    <header className="bg-background/50 backdrop-blur-sm border-b-8 border-primary">
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex justify-between items-center">
+          <Link href="/" className="text-4xl font-bold text-[#8b4513]">
             Burger Quest
-          </p>
-        </Link>
+          </Link>
+          <div>
+            {isAuthenticated ? (
+              <Button
+                onClick={logout}
+                className="bg-[#8b4513] text-white hover:bg-[#6b3410]"
+              >
+                Logout
+              </Button>
+            ) : (
+              <Link href="/login">
+                <Button className="bg-[#8b4513] text-white hover:bg-[#6b3410]">
+                  Login
+                </Button>
+              </Link>
+            )}
+          </div>
+        </div>
       </div>
     </header>
   );

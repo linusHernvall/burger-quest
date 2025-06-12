@@ -1,19 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { supabase } from "@/backend/supabase/client";
+import { useAuth } from "@/context/auth-context";
 import { Button } from "@/components/button";
 import { Input } from "@/components/input";
 import { ImageDropzone } from "@/components/image-dropzone";
 import { Textarea } from "@/components/textarea";
 
 export default function AddBurger() {
+  const { isAuthenticated } = useAuth();
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      toast.error("You must be logged in to add a burger");
+      router.push("/login");
+    }
+  }, [isAuthenticated, router]);
+
+  if (!isAuthenticated) {
+    return null;
+  }
 
   const uploadImage = async (file: File): Promise<string | null> => {
     try {

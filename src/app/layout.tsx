@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Rye, Special_Elite } from "next/font/google";
 import { Toaster } from "sonner";
-
-import Header from "@/components/header";
-
 import "./globals.css";
+import { AuthProvider } from "@/context/auth-context";
+import Header from "@/components/header";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -41,14 +40,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${rye.variable} ${specialElite.variable} antialiased`}>
-        <div
-          className="min-h-screen bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/paper.jpg')" }}
-        >
-          <Header />
-          {children}
-          <Toaster />
-        </div>
+        <AuthProvider>
+          <div
+            className="min-h-screen bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: "url('/paper.jpg')" }}
+          >
+            <Header />
+            {children}
+            <Toaster />
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );

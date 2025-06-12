@@ -1,8 +1,6 @@
 import Image from "next/image";
 import { supabase } from "@/backend/supabase/client";
-import { Button } from "@/components/button";
-import Link from "next/link";
-import { DeleteBurgerButton } from "@/components/delete-burger-button";
+import { AdminActions } from "@/components/admin-actions";
 
 interface BurgerPageProps {
   params: Promise<{
@@ -114,17 +112,7 @@ export default async function BurgerPage({ params }: BurgerPageProps) {
               </p>
               <p className="text-lg text-[#8b4513]">{burger.content}</p>
             </div>
-            <div className="flex flex-col lg:flex-row gap-2 w-full lg:w-1/2">
-              <Link href={`/edit-burger/${id}`}>
-                <Button className="bg-[#8b4513] text-white min-w-[50%] px-6 py-2 rounded-lg hover:bg-[#6b3410]">
-                  Edit burger
-                </Button>
-              </Link>
-              <DeleteBurgerButton
-                burgerId={id}
-                burgerName={burger.burger_name}
-              />
-            </div>
+            <AdminActions burgerId={id} burgerName={burger.burger_name} />
           </div>
         </div>
       </div>
