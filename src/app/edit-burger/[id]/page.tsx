@@ -36,7 +36,7 @@ export default function EditBurger({ params }: PageProps) {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      toast.error("You must be logged in to edit a burger");
+      toast.error("Du måste vara inloggad för att redigera en hamburgare");
       router.push("/");
       return;
     }
@@ -55,7 +55,7 @@ export default function EditBurger({ params }: PageProps) {
         setBurger(data);
       } catch (error) {
         console.error("Error fetching burger:", error);
-        toast.error("Failed to load burger data");
+        toast.error("Misslyckades att ladda hamburgarens data");
         router.push("/");
       } finally {
         setIsLoading(false);
@@ -135,7 +135,9 @@ export default function EditBurger({ params }: PageProps) {
           imageUrl = await uploadImage(selectedImage);
         } catch (error) {
           toast.error(
-            error instanceof Error ? error.message : "Failed to upload image"
+            error instanceof Error
+              ? error.message
+              : "Misslyckades att ladda upp bilden"
           );
           return;
         }
@@ -155,12 +157,12 @@ export default function EditBurger({ params }: PageProps) {
 
       if (updateError) throw updateError;
 
-      toast.success(`${burgerName} updated successfully!`);
+      toast.success(`${burgerName} uppdaterades framgångsrikt!`);
       router.push("/");
       router.refresh();
     } catch (error) {
       console.error("Error updating burger:", error);
-      toast.error("Failed to update burger. Please try again.");
+      toast.error("Misslyckades att uppdatera hamburgaren. Försök igen.");
     } finally {
       setIsSubmitting(false);
     }
@@ -169,7 +171,7 @@ export default function EditBurger({ params }: PageProps) {
   if (!isAuthenticated || isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        {isLoading ? "Loading..." : "Please log in to continue"}
+        {isLoading ? "Laddar..." : "Du måste vara inloggad för att fortsätta"}
       </div>
     );
   }
@@ -177,26 +179,26 @@ export default function EditBurger({ params }: PageProps) {
   if (!burger) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        Burger not found
+        Hamburgaren hittades inte
       </div>
     );
   }
 
   return (
     <div className="mx-auto max-w-5xl py-10 px-4 md:py-20">
-      <h1 className="text-4xl pb-8 font-bold">Edit Burger</h1>
+      <h1 className="text-4xl pb-8 font-bold">Redigera hamburgare</h1>
       <form onSubmit={handleOnSubmit} className="space-y-4">
         <Input
           type="text"
           name="burgerName"
-          placeholder="Burger Name"
+          placeholder="Hamburgarens namn"
           defaultValue={burger.burger_name}
           required
         />
         <Input
           type="text"
           name="restaurant"
-          placeholder="Restaurant"
+          placeholder="Restaurang"
           defaultValue={burger.restaurant}
           required
         />
@@ -205,7 +207,7 @@ export default function EditBurger({ params }: PageProps) {
           name="rating"
           min={1}
           max={10}
-          placeholder="Rating"
+          placeholder="Betyg"
           defaultValue={burger.rating}
           required
         />
@@ -216,7 +218,7 @@ export default function EditBurger({ params }: PageProps) {
         />
         <Textarea
           name="content"
-          placeholder="Thoughts on the burger..."
+          placeholder="Tankar om hamburgaren..."
           defaultValue={burger.content}
           required
         />
@@ -225,7 +227,7 @@ export default function EditBurger({ params }: PageProps) {
           type="submit"
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Updating..." : "Update Burger"}
+          {isSubmitting ? "Uppdaterar..." : "Uppdatera hamburgare"}
         </Button>
       </form>
     </div>

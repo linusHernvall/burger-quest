@@ -21,7 +21,7 @@ export function DeleteBurgerButton({
         className="bg-red-800 text-white min-w-[50%] px-6 py-2 rounded-lg hover:bg-red-900"
         onClick={() => setIsModalOpen(true)}
       >
-        Delete
+        Ta bort
       </Button>
       <DeleteBurgerModal
         burgerId={burgerId}

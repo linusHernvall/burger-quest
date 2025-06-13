@@ -32,12 +32,12 @@ export default function Header() {
                 onClick={handleLogout}
                 className="bg-[#8b4513] text-white hover:bg-[#6b3410]"
               >
-                Logout
+                Logga ut
               </Button>
             ) : (
               <Link href="/login">
                 <Button className="bg-[#8b4513] text-white hover:bg-[#6b3410]">
-                  Login
+                  Logga in
                 </Button>
               </Link>
             )}

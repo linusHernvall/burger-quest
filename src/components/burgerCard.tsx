@@ -71,8 +71,8 @@ export default function BurgerCard({
             {rating}/10
           </p>
           <Link href={`/burger/${id}`}>
-            <Button className="relative cursor-pointer mt-4 top-0 opacity-100 px-[32px] py-[16px] text-black no-underline rounded-lg capitalize tracking-wider transition-all duration-500 lg:top-[100px] lg:group-hover:top-0 lg:group-hover:opacity-100">
-              Read more
+            <Button className="relative cursor-pointer mt-4 top-0 opacity-100 px-[32px] py-[16px] text-black no-underline rounded-lg tracking-wider transition-all duration-500 lg:top-[100px] lg:group-hover:top-0 lg:group-hover:opacity-100">
+              Läs mer
             </Button>
           </Link>
         </div>

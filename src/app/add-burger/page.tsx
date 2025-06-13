@@ -19,7 +19,7 @@ export default function AddBurger() {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      toast.error("You must be logged in to add a burger");
+      toast.error("Du måste vara inloggad för att lägga till en hamburgare");
       router.push("/login");
     }
   }, [isAuthenticated, router]);
@@ -141,18 +141,18 @@ export default function AddBurger() {
 
   return (
     <div className="mx-auto max-w-5xl py-10 px-4 md:py-20">
-      <h1 className="text-4xl pb-8 font-bold">Add a New Burger</h1>
+      <h1 className="text-4xl pb-8 font-bold">Lägg till en ny hamburgare</h1>
       <form onSubmit={handleOnSubmit} className="space-y-4">
         <Input
           type="text"
           name="burgerName"
-          placeholder="Burger Name"
+          placeholder="Hamburgarens namn"
           required
         />
         <Input
           type="text"
           name="restaurant"
-          placeholder="Restaurant"
+          placeholder="Restaurang"
           required
         />
         <Input
@@ -160,7 +160,7 @@ export default function AddBurger() {
           name="rating"
           min={1}
           max={10}
-          placeholder="Rating"
+          placeholder="Betyg"
           required
         />
         <ImageDropzone
@@ -169,7 +169,7 @@ export default function AddBurger() {
         />
         <Textarea
           name="content"
-          placeholder="Thoughts on the burger..."
+          placeholder="Tankar om hamburgaren..."
           required
         />
         <Button
@@ -177,7 +177,7 @@ export default function AddBurger() {
           type="submit"
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Submitting..." : "Submit"}
+          {isSubmitting ? "Skickar..." : "Skicka"}
         </Button>
       </form>
     </div>

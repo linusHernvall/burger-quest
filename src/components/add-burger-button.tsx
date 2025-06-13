@@ -13,7 +13,9 @@ export function AddBurgerButton() {
 
   return (
     <Link href="add-burger">
-      <Button className="cursor-pointer">Add Burger</Button>
+      <Button className="cursor-pointer">
+        Lägg till hamburgare <span className="text-2xl">+</span>
+      </Button>
     </Link>
   );
 }

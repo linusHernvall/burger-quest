@@ -34,12 +34,12 @@ export function DeleteBurgerModal({
 
       if (error) throw error;
 
-      toast.success(`${burgerName} has been deleted successfully!`);
+      toast.success(`${burgerName} har tagits bort framgångsrikt!`);
       router.push("/");
       router.refresh();
     } catch (error) {
       console.error("Error deleting burger:", error);
-      toast.error("Failed to delete burger. Please try again.");
+      toast.error("Misslyckades att ta bort hamburgaren. Försök igen.");
     } finally {
       setIsDeleting(false);
       onClose();
@@ -48,12 +48,14 @@ export function DeleteBurgerModal({
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="bg-background/50 backdrop-blur-sm rounded-lg shadow-lg p-8 border-8 border-primary max-w-md w-full mx-4">
-        <h1 className="text-4xl pb-8 font-bold text-red-600">Delete Burger</h1>
-        <p className="text-xl mb-8">
-          Are you sure you want to delete{" "}
-          <span className="font-bold">{burgerName}</span>? This action cannot be
-          undone.
+      <div className="bg-background/50 backdrop-blur-sm rounded-lg shadow-lg p-8 border-2 border-black max-w-md w-full mx-4">
+        <h1 className="text-3xl pb-8 font-bold text-black">
+          Ta bort hamburgare
+        </h1>
+        <p className="text-xl mb-8 text-black">
+          Är du säker på att du vill ta bort{" "}
+          <span className="font-bold">{burgerName}</span>? Denna åtgärd kan inte
+          ångras.
         </p>
         <div className="flex gap-4">
           <Button
@@ -61,14 +63,14 @@ export function DeleteBurgerModal({
             onClick={handleDelete}
             disabled={isDeleting}
           >
-            {isDeleting ? "Deleting..." : "Yes, Delete"}
+            {isDeleting ? "Tar bort..." : "Ja, ta bort"}
           </Button>
           <Button
             className="bg-gray-600 hover:bg-gray-700 text-white"
             onClick={onClose}
             disabled={isDeleting}
           >
-            Cancel
+            Avbryt
           </Button>
         </div>
       </div>

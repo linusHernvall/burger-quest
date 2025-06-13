@@ -21,14 +21,14 @@ export default function LoginPage() {
     try {
       const success = await login(password);
       if (success) {
-        toast.success("Login successful!");
+        toast.success("Inloggningen lyckades!");
         router.push("/");
         router.refresh();
       } else {
-        toast.error("Invalid password");
+        toast.error("Ogiltligt lösenord");
       }
     } catch (error) {
-      toast.error("An error occurred during login");
+      toast.error("Ett fel uppstod under inloggningen");
     } finally {
       setIsLoading(false);
     }
@@ -36,17 +36,17 @@ export default function LoginPage() {
 
   return (
     <div className="mx-auto max-w-5xl py-10 px-4 md:py-20">
-      <h1 className="text-4xl pb-8 font-bold">Admin Login</h1>
+      <h1 className="text-4xl pb-8 font-bold">Logga in</h1>
       <form onSubmit={handleSubmit} className="space-y-4 max-w-md">
         <Input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter admin password"
+          placeholder="Skriv in lösenordet"
           required
         />
         <Button type="submit" className="cursor-pointer" disabled={isLoading}>
-          {isLoading ? "Logging in..." : "Login"}
+          {isLoading ? "Loggar in..." : "Logga in"}
         </Button>
       </form>
     </div>

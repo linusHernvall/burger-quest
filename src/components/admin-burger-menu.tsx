@@ -47,13 +47,13 @@ export function AdminBurgerMenu({
             onSelect={handleEdit}
             className="w-full px-3 py-2 text-left text-sm hover:bg-neutral-100 rounded cursor-pointer"
           >
-            Edit
+            Redigera
           </DropdownMenu.Item>
           <DropdownMenu.Item
             onSelect={handleDelete}
             className="w-full px-3 py-2 text-left text-sm text-red-600 hover:bg-neutral-100 rounded cursor-pointer"
           >
-            Delete
+            Ta bort
           </DropdownMenu.Item>
         </DropdownMenu.Content>
       </DropdownMenu.Root>

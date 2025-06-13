@@ -36,10 +36,10 @@ export function WantedPoster({
       style={{ backgroundImage: "url('/wanted-poster.png')" }}
     >
       <div className="flex flex-col items-center w-full pt-16 md:pt-20 px-2 sm:px-12 lg:px-8">
-        <h1 className="text-4xl md:text-6xl text-black text-center">
+        <h1 className="text-2xl md:text-5xl text-black text-center">
           {burgerName.toUpperCase()}
         </h1>
-        <div className="absolute top-16 right-8 sm:top-16 sm:right-18 md:top-22 lg:top-22 lg:right-14">
+        <div className="absolute top-15 right-8 sm:right-18 md:top-20 lg:right-14">
           {isAuthenticated && (
             <AdminBurgerMenu burgerId={burgerId} burgerName={burgerName} />
           )}
@@ -48,7 +48,7 @@ export function WantedPoster({
         <div className="flex flex-row items-center w-full px-8 gap-2">
           <div className="w-full h-0.5 bg-black mb-2"></div>
           <p
-            className="text-2xl md:text-4xl text-center mb-2 text-black w-fit whitespace-nowrap"
+            className="text-xl md:text-3xl text-center mb-2 text-black w-fit whitespace-nowrap"
             style={{ fontFamily: "var(--font-rye)" }}
           >
             {restaurant}
@@ -88,9 +88,12 @@ export function WantedPoster({
         </div>
       </div>
       <div className="flex flex-col items-center w-full px-6">
-        <h2 className="text-xl sm:text-4xl md:text-3xl text-black mb-2 text-center">
+        <p
+          className="text-xl sm:text-4xl md:text-3xl text-black mb-2 text-center"
+          style={{ fontFamily: "var(--font-rye)" }}
+        >
           Beskrivning
-        </h2>
+        </p>
         <p className="text-base text-black text-center mb-8">{description}</p>
       </div>
       <div className="flex flex-col items-center w-full px-6 mb-10">

@@ -60,12 +60,12 @@ export function ImageDropzone({
             alt="Preview"
             className="max-h-48 mx-auto rounded-lg object-contain"
           />
-          <p className="text-sm">Click or drag to replace image</p>
+          <p className="text-sm">Klicka eller dra för att ersätta bilden</p>
         </div>
       ) : (
         <div className="space-y-2">
-          <p className="text-lg font-medium">Drag & drop your image here</p>
-          <p className="text-sm">or click to select an image</p>
+          <p className="text-lg font-medium">Dra och släpp din bild här</p>
+          <p className="text-sm">eller klicka för att välja en bild</p>
         </div>
       )}
     </div>

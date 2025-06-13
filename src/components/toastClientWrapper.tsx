@@ -21,7 +21,7 @@ export default function ToastClientWrapper() {
       // Set a new timeout
       timeoutRef.current = setTimeout(() => {
         const burgerName = searchParams.get("burgerName");
-        toast.success(`${burgerName} added successfully!`);
+        toast.success(`${burgerName} har lagts till framgångsrikt!`);
         hasShownToast.current = true;
       }, 500); // 500ms delay
     }
