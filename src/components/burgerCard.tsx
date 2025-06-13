@@ -24,7 +24,7 @@ export default function BurgerCard({
 }: BurgerCardProps) {
   return (
     <div>
-      <div className="relative h-[480px] bg-[#404040] rounded-lg overflow-hidden group">
+      <div className="relative h-[480px] bg-card-foreground rounded-lg overflow-hidden group">
         {/* ::before effect */}
         <div className="absolute top-[-50%] w-full h-full bg-primary skew-y-[345deg] transition-all duration-500 group-hover:top-[-70%] group-hover:skew-y-[390deg] z-0" />
 
