@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { AdminActions } from "./admin-actions";
+import { AdminBurgerMenu } from "./admin-burger-menu";
 
 interface WantedPosterProps {
   burgerName: string;
@@ -33,6 +33,10 @@ export function WantedPoster({
         <h1 className="text-4xl md:text-6xl text-black text-center">
           {burgerName.toUpperCase()}
         </h1>
+        <div className="absolute top-16 right-8 sm:top-16 sm:right-18 md:top-22 lg:top-22 lg:right-14">
+          <AdminBurgerMenu burgerId={burgerId} burgerName={burgerName} />
+        </div>
+
         <div className="flex flex-row items-center w-full px-8 gap-2">
           <div className="w-full h-0.5 bg-black mb-2"></div>
           <p
@@ -82,11 +86,10 @@ export function WantedPoster({
         <p className="text-base text-black text-center mb-8">{description}</p>
       </div>
       <div className="flex flex-col items-center w-full px-6 mb-10">
-        <p className="text-lg sm:text-2xl md:text-3xl text-black mb-1">Betyg</p>
+        <p className="text-lg sm:text-2xl md:text-3xl text-black mb-2">Betyg</p>
         <p className="text-xl sm:text-3xl md:text-4xl text-black mb-2">
           ★ {rating} av 10 ★
         </p>
-        <AdminActions burgerId={burgerId} burgerName={burgerName} />
       </div>
     </div>
   );
