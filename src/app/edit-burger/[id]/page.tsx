@@ -37,16 +37,10 @@ export default function EditBurger({ params }: PageProps) {
   useEffect(() => {
     if (!isAuthenticated) {
       toast.error("You must be logged in to edit a burger");
-      router.push("/login");
+      router.push("/");
+      return;
     }
-  }, [isAuthenticated, router]);
 
-  if (!isAuthenticated) {
-    return null;
-  }
-
-  // Fetch burger data when component mounts
-  useEffect(() => {
     const fetchBurger = async () => {
       try {
         const { data, error } = await supabase
@@ -69,7 +63,7 @@ export default function EditBurger({ params }: PageProps) {
     };
 
     fetchBurger();
-  }, [id, router]);
+  }, [id, router, isAuthenticated]);
 
   const uploadImage = async (file: File): Promise<string | null> => {
     try {
@@ -172,10 +166,10 @@ export default function EditBurger({ params }: PageProps) {
     }
   };
 
-  if (isLoading) {
+  if (!isAuthenticated || isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        Loading...
+        {isLoading ? "Loading..." : "Please log in to continue"}
       </div>
     );
   }

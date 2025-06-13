@@ -1,5 +1,9 @@
+"use client";
+
 import Image from "next/image";
+
 import { AdminBurgerMenu } from "./admin-burger-menu";
+import { useAuth } from "@/context/auth-context";
 
 interface WantedPosterProps {
   burgerName: string;
@@ -24,6 +28,8 @@ export function WantedPoster({
   isUniqueHighest,
   burgerId,
 }: WantedPosterProps) {
+  const { isAuthenticated } = useAuth();
+
   return (
     <div
       className="relative w-full max-w-2xl mx-auto aspect-[3/4] flex flex-col items-center justify-between p-0 bg-contain bg-no-repeat bg-center "
@@ -34,7 +40,9 @@ export function WantedPoster({
           {burgerName.toUpperCase()}
         </h1>
         <div className="absolute top-16 right-8 sm:top-16 sm:right-18 md:top-22 lg:top-22 lg:right-14">
-          <AdminBurgerMenu burgerId={burgerId} burgerName={burgerName} />
+          {isAuthenticated && (
+            <AdminBurgerMenu burgerId={burgerId} burgerName={burgerName} />
+          )}
         </div>
 
         <div className="flex flex-row items-center w-full px-8 gap-2">

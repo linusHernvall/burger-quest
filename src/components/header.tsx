@@ -3,9 +3,21 @@
 import Link from "next/link";
 import { useAuth } from "@/context/auth-context";
 import { Button } from "./button";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const { isAuthenticated, logout } = useAuth();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    try {
+      logout();
+      router.push("/");
+      router.refresh();
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
 
   return (
     <header className="bg-background/50 backdrop-blur-sm border-b-8 border-primary">
@@ -17,7 +29,7 @@ export default function Header() {
           <div>
             {isAuthenticated ? (
               <Button
-                onClick={logout}
+                onClick={handleLogout}
                 className="bg-[#8b4513] text-white hover:bg-[#6b3410]"
               >
                 Logout
