@@ -46,14 +46,14 @@ export function WantedPoster({
         </div>
 
         <div className="flex flex-row items-center w-full px-8 gap-2">
-          <div className="w-full h-0.5 bg-black mb-2"></div>
+          <div className="w-full h-0.5 bg-black mb-2" />
           <p
             className="text-xl md:text-3xl text-center mb-2 text-black w-fit whitespace-nowrap"
             style={{ fontFamily: "var(--font-rye)" }}
           >
             {restaurant}
           </p>
-          <div className="w-full h-0.5 bg-black mb-2"></div>
+          <div className="w-full h-0.5 bg-black mb-2" />
         </div>
         <div className="flex flex-col items-center px-6">
           <Image src="/banner.png" alt="Banner" width={160} height={8} />

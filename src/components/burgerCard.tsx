@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 import { Button } from "./button";
 import Image from "next/image";
@@ -22,6 +26,14 @@ export default function BurgerCard({
   isHighestRated,
   isUniqueHighest,
 }: BurgerCardProps) {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isUniqueHighest) {
+      localStorage.setItem("showSheriffModal", "true");
+    }
+  }, [isUniqueHighest]);
+
   return (
     <div>
       <div className="relative h-[480px] bg-card-foreground rounded-lg overflow-hidden group">

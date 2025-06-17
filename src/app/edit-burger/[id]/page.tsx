@@ -157,8 +157,29 @@ export default function EditBurger({ params }: PageProps) {
 
       if (updateError) throw updateError;
 
+      // Check if this burger is now the highest rated
+      const { data: allBurgers } = await supabase
+        .from("burgers")
+        .select("rating")
+        .order("rating", { ascending: false });
+
+      if (allBurgers && allBurgers.length > 0) {
+        const highestRating = allBurgers[0].rating;
+        const highestRatedBurgers = allBurgers.filter(
+          (b) => b.rating === highestRating
+        );
+        const isUniqueHighest = highestRatedBurgers.length === 1;
+
+        if (rating === highestRating && isUniqueHighest) {
+          localStorage.setItem("showSheriffModal", "true");
+          localStorage.setItem("burgerName", burgerName);
+        }
+      }
+
       toast.success(`${burgerName} uppdaterades framgångsrikt!`);
-      router.push("/");
+
+      // Use replace instead of push to ensure a fresh page load
+      router.replace("/");
       router.refresh();
     } catch (error) {
       console.error("Error updating burger:", error);
