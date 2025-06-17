@@ -48,7 +48,7 @@ export function DeleteBurgerModal({
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="bg-background/50 backdrop-blur-sm rounded-lg shadow-lg p-8 border-2 border-black max-w-md w-full mx-4">
+      <div className="bg-background rounded-lg shadow-lg p-8 border-2 border-black max-w-md w-full mx-4">
         <h1 className="text-3xl pb-8 font-bold text-black">
           Ta bort hamburgare
         </h1>

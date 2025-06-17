@@ -56,7 +56,7 @@ export default async function BurgerPage({ params }: BurgerPageProps) {
   const formattedDate = new Date(burger.created_at).toISOString().slice(0, 10);
 
   return (
-    <div className="flex justify-center items-center px-4 py-10">
+    <div className="flex justify-center items-center h-[calc(100dvh-80px)] sm:h-auto px-4 py-10 md:py-20">
       <WantedPoster
         burgerName={burger.burger_name}
         restaurant={burger.restaurant}
