@@ -160,7 +160,7 @@ export default function EditBurger({ params }: PageProps) {
       // Check if this burger is now the highest rated
       const { data: allBurgers } = await supabase
         .from("burgers")
-        .select("rating")
+        .select("*")
         .order("rating", { ascending: false });
 
       if (allBurgers && allBurgers.length > 0) {
@@ -170,13 +170,27 @@ export default function EditBurger({ params }: PageProps) {
         );
         const isUniqueHighest = highestRatedBurgers.length === 1;
 
+        // If this burger is now the highest rated
         if (rating === highestRating && isUniqueHighest) {
           localStorage.setItem("showSheriffModal", "true");
           localStorage.setItem("burgerName", burgerName);
         }
+        // If this burger's rating was lowered and another burger is now the highest rated
+        else if (
+          burger &&
+          rating < burger.rating &&
+          highestRatedBurgers.length === 1
+        ) {
+          const newHighestBurger = highestRatedBurgers[0];
+          localStorage.setItem("showSheriffModal", "true");
+          localStorage.setItem("burgerName", newHighestBurger.burger_name);
+        }
       }
 
       toast.success(`${burgerName} uppdaterades framgångsrikt!`);
+
+      // Add a small delay to ensure localStorage is set before navigation
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // Use replace instead of push to ensure a fresh page load
       router.replace("/");

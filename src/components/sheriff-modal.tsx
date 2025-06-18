@@ -19,25 +19,28 @@ export function SheriffModal({
   useEffect(() => {
     if (isOpen) {
       setIsVisible(true);
+    } else {
+      // Add a small delay before hiding to allow for animation
+      const timer = setTimeout(() => {
+        setIsVisible(false);
+      }, 300);
+      return () => clearTimeout(timer);
     }
-  }, [isOpen, onClose]);
+  }, [isOpen]);
+
+  const handleClose = () => {
+    setIsVisible(false);
+    onClose();
+  };
 
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex backdrop-blur-xs items-center justify-center ">
-      <div
-        onClick={() => {
-          setIsVisible(false);
-          onClose();
-        }}
-      />
+    <div className="fixed inset-0 z-50 flex backdrop-blur-xs items-center justify-center">
+      <div className="absolute inset-0" onClick={handleClose} />
       <div className="relative bg-white rounded-lg shadow-lg p-8 max-w-md w-full mx-4 transform transition-all border-2 border-black">
         <button
-          onClick={() => {
-            setIsVisible(false);
-            onClose();
-          }}
+          onClick={handleClose}
           className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 cursor-pointer"
         >
           ✕
@@ -55,7 +58,6 @@ export function SheriffModal({
           </p>
           <div className="flex flex-row items-center justify-center w-full px-2 gap-2">
             <div className="w-full h-0.5 bg-black" />
-
             <h2 className="text-3xl font-bold text-center">{burgerName}</h2>
             <div className="w-full h-0.5 bg-black" />
           </div>

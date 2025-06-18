@@ -31,8 +31,9 @@ export default function BurgerCard({
   useEffect(() => {
     if (isUniqueHighest) {
       localStorage.setItem("showSheriffModal", "true");
+      localStorage.setItem("burgerName", burger);
     }
-  }, [isUniqueHighest]);
+  }, [isUniqueHighest, burger]);
 
   return (
     <div>

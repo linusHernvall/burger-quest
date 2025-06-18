@@ -16,13 +16,22 @@ export default function Home() {
     const storedBurgerName = localStorage.getItem("burgerName");
 
     if (shouldShowModal && storedBurgerName) {
-      setBurgerName(storedBurgerName);
-      setShowSheriffModal(true);
-      // Clean up localStorage
-      localStorage.removeItem("showSheriffModal");
-      localStorage.removeItem("burgerName");
+      // Add a small delay to ensure the page is fully loaded
+      const timer = setTimeout(() => {
+        setBurgerName(storedBurgerName);
+        setShowSheriffModal(true);
+        // Clean up localStorage
+        localStorage.removeItem("showSheriffModal");
+        localStorage.removeItem("burgerName");
+      }, 100);
+
+      return () => clearTimeout(timer);
     }
   }, []);
+
+  const handleCloseModal = () => {
+    setShowSheriffModal(false);
+  };
 
   return (
     <div className="mx-auto max-w-5xl py-10 px-4 md:py-20 xl:container">
@@ -36,7 +45,7 @@ export default function Home() {
       <CardGrid />
       <SheriffModal
         isOpen={showSheriffModal}
-        onClose={() => setShowSheriffModal(false)}
+        onClose={handleCloseModal}
         burgerName={burgerName}
       />
     </div>
