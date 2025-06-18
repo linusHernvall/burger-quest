@@ -26,11 +26,11 @@ export default function Header() {
         <div className="flex justify-between items-center">
           <Link href="/" className="text-4xl">
             <Image
-              src="/bq-sign.png"
+              src="/logo.png"
               alt="Logotype for Burger Quest"
-              width={240}
-              height={134}
-              className="w-[160px] h-auto md:w-[240px] "
+              width={160}
+              height={106}
+              className="w-[160px] h-[106px] md:w-[240px] md:h-[160px]"
             />
           </Link>
           <div>
