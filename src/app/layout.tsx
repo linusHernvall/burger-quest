@@ -4,6 +4,7 @@ import { Toaster } from "sonner";
 import "./globals.css";
 import { AuthProvider } from "@/context/auth-context";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -42,13 +43,13 @@ export default function RootLayout({
       <body className={`${rye.variable} ${specialElite.variable} antialiased`}>
         <AuthProvider>
           <div
-            className=" relative min-h-screen bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: "url('/wood.jpg')" }}
+            className=" min-h-screen bg-cover bg-center bg-no-repeat "
+            style={{ backgroundImage: "url('/desert.png')" }}
           >
-            <div className="absolute inset-0 bg-black/40 z-0" />
-            <div className="relative z-10">
+            <div className="z-10">
               <Header />
               {children}
+              <Footer />
               <Toaster />
             </div>
           </div>

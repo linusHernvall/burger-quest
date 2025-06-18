@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useAuth } from "@/context/auth-context";
 import { Button } from "./button";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function Header() {
   const { isAuthenticated, logout } = useAuth();
@@ -20,11 +21,17 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-background/50 backdrop-blur-sm border-b-8 border-primary">
-      <div className="container mx-auto px-4 py-4">
+    <header className="mx-0">
+      <div className="lg:container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           <Link href="/" className="text-4xl">
-            Burger Quest
+            <Image
+              src="/bq-sign.png"
+              alt="Logotype for Burger Quest"
+              width={240}
+              height={134}
+              className="w-[160px] h-auto md:w-[240px] "
+            />
           </Link>
           <div>
             {isAuthenticated ? (

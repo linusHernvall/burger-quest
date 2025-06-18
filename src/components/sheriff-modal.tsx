@@ -45,7 +45,7 @@ export function SheriffModal({
         <div className="flex flex-col items-center space-y-4">
           <Image
             src="/woody.gif"
-            alt="Sheriff badge"
+            alt="Sheriff Woody"
             width={400}
             height={320}
             className="w-[400px] h-auto"
