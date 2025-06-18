@@ -127,12 +127,12 @@
   h4,
   h5,
   h6 {
-    @apply text-white;
+    /* @apply text-white; */
     font-family: var(--font-rye);
   }
 
   p {
-    @apply text-white;
+    /* @apply text-white; */
     font-family: var(--font-special-elite);
   }
 }

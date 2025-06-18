@@ -22,7 +22,7 @@ export default function Header() {
 
   return (
     <header className="mx-0">
-      <div className="lg:container mx-auto px-4 py-4">
+      <div className="lg:container mx-auto px-4 pt-4 pb-0">
         <div className="flex justify-between items-center">
           <Link href="/" className="text-4xl">
             <Image

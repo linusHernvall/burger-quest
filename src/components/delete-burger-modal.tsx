@@ -49,10 +49,8 @@ export function DeleteBurgerModal({
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center z-50">
       <div className="bg-background rounded-lg shadow-lg p-8 border-2 border-black max-w-md w-full mx-4">
-        <h1 className="text-3xl pb-8 font-bold text-black">
-          Ta bort hamburgare
-        </h1>
-        <p className="text-xl mb-8 text-black">
+        <h1 className="text-3xl pb-8 font-bold ">Ta bort hamburgare</h1>
+        <p className="text-xl mb-8 ">
           Är du säker på att du vill ta bort{" "}
           <span className="font-bold">{burgerName}</span>? Denna åtgärd kan inte
           ångras.

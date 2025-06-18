@@ -50,15 +50,13 @@ export function SheriffModal({
             height={320}
             className="w-[400px] h-auto"
           />
-          <p className="text-2xl text-black font-bold text-center">
+          <p className="text-2xl font-bold text-center">
             There&apos;s a new sheriff in town!
           </p>
           <div className="flex flex-row items-center justify-center w-full px-2 gap-2">
             <div className="w-full h-0.5 bg-black" />
 
-            <h2 className="text-3xl text-black font-bold text-center">
-              {burgerName}
-            </h2>
+            <h2 className="text-3xl font-bold text-center">{burgerName}</h2>
             <div className="w-full h-0.5 bg-black" />
           </div>
         </div>

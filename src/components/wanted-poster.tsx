@@ -36,7 +36,7 @@ export function WantedPoster({
       style={{ backgroundImage: "url('/wanted-poster.png')" }}
     >
       <div className="flex flex-col items-center w-full pt-16 md:pt-20 px-2 sm:px-12 lg:px-8">
-        <h1 className="text-2xl md:text-5xl text-black text-center">
+        <h1 className="text-2xl md:text-5xl text-center">
           {burgerName.toUpperCase()}
         </h1>
         <div className="absolute top-15 right-8 sm:right-18 md:top-20 lg:right-14">
@@ -48,7 +48,7 @@ export function WantedPoster({
         <div className="flex flex-row items-center w-full px-8 gap-2">
           <div className="w-full h-0.5 bg-black mb-2" />
           <p
-            className="text-xl md:text-3xl text-center mb-2 text-black w-fit whitespace-nowrap"
+            className="text-xl md:text-3xl text-center mb-2 w-fit whitespace-nowrap"
             style={{ fontFamily: "var(--font-rye)" }}
           >
             {restaurant}
@@ -89,16 +89,16 @@ export function WantedPoster({
       </div>
       <div className="flex flex-col items-center w-full px-6">
         <p
-          className="text-xl sm:text-4xl md:text-3xl text-black mb-2 text-center"
+          className="text-xl sm:text-4xl md:text-3xl mb-2 text-center"
           style={{ fontFamily: "var(--font-rye)" }}
         >
           Beskrivning
         </p>
-        <p className="text-base text-black text-center mb-8">{description}</p>
+        <p className="text-base text-center mb-8">{description}</p>
       </div>
       <div className="flex flex-col items-center w-full px-6 mb-10">
-        <p className="text-lg sm:text-2xl md:text-3xl text-black mb-2">Betyg</p>
-        <p className="text-xl sm:text-3xl md:text-4xl text-black mb-2">
+        <p className="text-lg sm:text-2xl md:text-3xl mb-2">Betyg</p>
+        <p className="text-xl sm:text-3xl md:text-4xl mb-2">
           ★ {rating} av 10 ★
         </p>
       </div>
