@@ -43,15 +43,14 @@ export default function RootLayout({
       <body className={`${rye.variable} ${specialElite.variable} antialiased`}>
         <AuthProvider>
           <div
-            className=" min-h-screen bg-cover bg-center bg-no-repeat "
+            className="fixed inset-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: "url('/desert.png')" }}
-          >
-            <div className="z-10">
-              <Header />
-              {children}
-              <Footer />
-              <Toaster />
-            </div>
+          />
+          <div className="relative z-10 min-h-[100dvh]">
+            <Header />
+            {children}
+            <Footer />
+            <Toaster />
           </div>
         </AuthProvider>
       </body>
