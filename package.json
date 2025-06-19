@@ -1,7 +1,8 @@
 {
-  "name": "temp-project",
+  "name": "burger-quest",
   "version": "0.1.0",
   "private": true,
+  "description": "Track and rate your burger adventures - A modern fullstack application built with Next.js, TypeScript, and Supabase",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",

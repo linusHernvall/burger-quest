@@ -94,7 +94,7 @@ export function WantedPoster({
         >
           Beskrivning
         </p>
-        <p className="text-base text-center mb-8">{description}</p>
+        <p className="text-base text-center mb-8 px-8">{description}</p>
       </div>
       <div className="flex flex-col items-center w-full px-6 mb-10">
         <p className="text-lg sm:text-2xl md:text-3xl mb-2">Betyg</p>

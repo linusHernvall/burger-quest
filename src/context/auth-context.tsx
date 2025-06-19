@@ -5,38 +5,75 @@ import { createContext, useContext, useState, useEffect } from "react";
 interface AuthContextType {
   isAuthenticated: boolean;
   login: (password: string) => Promise<boolean>;
-  logout: () => void;
+  logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// This should be stored in an environment variable in production
-const ADMIN_PASSWORD = "BurgerQuest2024";
-
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is already authenticated
-    const auth = localStorage.getItem("isAuthenticated");
-    if (auth === "true") {
-      setIsAuthenticated(true);
-    }
+    // Check authentication status on mount
+    checkAuthStatus();
   }, []);
 
-  const login = async (password: string): Promise<boolean> => {
-    if (password === ADMIN_PASSWORD) {
-      setIsAuthenticated(true);
-      localStorage.setItem("isAuthenticated", "true");
-      return true;
+  const checkAuthStatus = async () => {
+    try {
+      const response = await fetch("/api/auth/check", {
+        method: "GET",
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        setIsAuthenticated(true);
+      }
+    } catch (error) {
+      console.error("Error checking auth status:", error);
+    } finally {
+      setIsLoading(false);
     }
-    return false;
   };
 
-  const logout = () => {
-    setIsAuthenticated(false);
-    localStorage.removeItem("isAuthenticated");
+  const login = async (password: string): Promise<boolean> => {
+    try {
+      const response = await fetch("/api/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ password }),
+      });
+
+      if (response.ok) {
+        setIsAuthenticated(true);
+        return true;
+      }
+
+      return false;
+    } catch (error) {
+      console.error("Login error:", error);
+      return false;
+    }
   };
+
+  const logout = async (): Promise<void> => {
+    try {
+      await fetch("/api/auth", {
+        method: "DELETE",
+        credentials: "include",
+      });
+      setIsAuthenticated(false);
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, logout }}>

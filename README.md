@@ -1,6 +1,6 @@
-# Next.js 14 Fullstack Application
+# Burger Quest 🍔
 
-A modern fullstack application built with Next.js 14, TypeScript, TailwindCSS, Shadcn UI, and Supabase.
+A modern fullstack application for tracking and rating your burger adventures, built with Next.js 14, TypeScript, TailwindCSS, Shadcn UI, and Supabase.
 
 ## Features
 
@@ -12,21 +12,21 @@ A modern fullstack application built with Next.js 14, TypeScript, TailwindCSS, S
 - 📱 Responsive design
 - 🔄 Server Components by default
 - 🏗️ Clean project structure
+- 🖼️ Image upload and storage
+- ⭐ Burger rating system
+- 👑 Highest rated burger tracking
 
 ## Project Structure
 
 ```
 src/
-├── frontend/
-│   ├── app/          # App Router pages
-│   ├── components/   # Shared UI components
-│   ├── lib/         # Frontend utilities
-│   └── types/       # Frontend type definitions
+├── app/          # App Router pages
+├── components/   # Shared UI components
+├── context/      # React context providers
+├── lib/         # Frontend utilities
 ├── backend/
-│   ├── components/  # Backend components
-│   ├── lib/        # Backend utilities
-│   ├── types/      # Backend type definitions
-│   └── supabase/   # Supabase client and server logic
+│   ├── supabase/  # Supabase client and server logic
+│   └── types/     # Backend type definitions
 ```
 
 ## Getting Started
@@ -38,21 +38,28 @@ src/
    npm install
    ```
 
-3. Create a `.env.local` file in the root directory with your Supabase credentials:
+3. Copy the environment template and configure your variables:
+
+   ```bash
+   cp env.example .env.local
+   ```
+
+4. Update `.env.local` with your Supabase credentials:
 
    ```
    NEXT_PUBLIC_SUPABASE_URL=your-project-url
    NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+   NEXT_PUBLIC_ADMIN_PASSWORD=your-secure-admin-password
    SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
    ```
 
-4. Run the development server:
+5. Run the development server:
 
    ```bash
    npm run dev
    ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+6. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Development
 
@@ -60,11 +67,69 @@ src/
 - `npm run build` - Build for production
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
-- `npm run type-check` - Run TypeScript type checking
 
-## Deployment
+## Deployment to Vercel
 
-This project is configured for deployment on Vercel. Simply connect your repository to Vercel and it will automatically deploy your application.
+### Prerequisites
+
+1. **Supabase Setup**: Ensure your Supabase project is configured with:
+
+   - Database tables (`burgers` table)
+   - Storage bucket (`burger-images`)
+   - Proper Row Level Security (RLS) policies
+   - Authentication enabled
+
+2. **Environment Variables**: You'll need to configure these in Vercel:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `NEXT_PUBLIC_ADMIN_PASSWORD`
+
+### Deployment Steps
+
+1. **Connect to Vercel**:
+
+   - Push your code to GitHub/GitLab
+   - Connect your repository to Vercel
+   - Vercel will automatically detect Next.js
+
+2. **Configure Environment Variables**:
+
+   - Go to your Vercel project settings
+   - Navigate to "Environment Variables"
+   - Add all required environment variables from your `.env.local`
+
+3. **Deploy**:
+   - Vercel will automatically build and deploy on push
+   - Monitor the build logs for any issues
+
+### Post-Deployment Checklist
+
+- [ ] Verify all environment variables are set correctly
+- [ ] Test authentication flow
+- [ ] Test image upload functionality
+- [ ] Verify admin login works
+- [ ] Check that burger CRUD operations work
+- [ ] Test responsive design on mobile devices
+
+### Troubleshooting
+
+**Build Errors**:
+
+- Ensure all dependencies are in `package.json`
+- Check that TypeScript compilation passes locally
+- Verify environment variables are properly configured
+
+**Runtime Errors**:
+
+- Check browser console for client-side errors
+- Verify Supabase connection and permissions
+- Ensure storage bucket is properly configured
+
+**Image Upload Issues**:
+
+- Verify Supabase storage bucket exists (`burger-images`)
+- Check storage policies allow authenticated uploads
+- Ensure proper CORS configuration
 
 ## Contributing
 
@@ -76,4 +141,4 @@ This project is configured for deployment on Vercel. Simply connect your reposit
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License.

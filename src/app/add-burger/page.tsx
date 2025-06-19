@@ -177,7 +177,7 @@ export default function AddBurger() {
           type="submit"
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Skickar..." : "Skicka"}
+          {isSubmitting ? "Lägger till..." : "Lägg till"}
         </Button>
       </form>
     </div>

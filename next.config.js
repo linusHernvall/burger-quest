@@ -1,12 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {
-    appDir: true,
-  },
   // Accepts images from the following domain (my domain at Supabase).
   images: {
-    domains: ["xqzmstpehsjsosapiiew.supabase.co"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "xqzmstpehsjsosapiiew.supabase.co",
+        port: "",
+        pathname: "/storage/v1/object/public/**",
+      },
+    ],
   },
 };
 
