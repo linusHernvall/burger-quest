@@ -170,20 +170,19 @@ export default function EditBurger({ params }: PageProps) {
         );
         const isUniqueHighest = highestRatedBurgers.length === 1;
 
-        // If this burger is now the highest rated
-        if (rating === highestRating && isUniqueHighest) {
-          localStorage.setItem("showSheriffModal", "true");
-          localStorage.setItem("burgerName", burgerName);
-        }
-        // If this burger's rating was lowered and another burger is now the highest rated
-        else if (
-          burger &&
-          rating < burger.rating &&
-          highestRatedBurgers.length === 1
-        ) {
-          const newHighestBurger = highestRatedBurgers[0];
-          localStorage.setItem("showSheriffModal", "true");
-          localStorage.setItem("burgerName", newHighestBurger.burger_name);
+        // Only show modal if the rating actually changed and there's a new highest rated burger
+        if (burger && rating !== burger.rating) {
+          // If this burger is now the highest rated
+          if (rating === highestRating && isUniqueHighest) {
+            localStorage.setItem("showSheriffModal", "true");
+            localStorage.setItem("burgerName", burgerName);
+          }
+          // If this burger's rating was lowered and another burger is now the highest rated
+          else if (rating < burger.rating && highestRatedBurgers.length === 1) {
+            const newHighestBurger = highestRatedBurgers[0];
+            localStorage.setItem("showSheriffModal", "true");
+            localStorage.setItem("burgerName", newHighestBurger.burger_name);
+          }
         }
       }
 
@@ -192,7 +191,6 @@ export default function EditBurger({ params }: PageProps) {
       // Add a small delay to ensure localStorage is set before navigation
       await new Promise((resolve) => setTimeout(resolve, 100));
 
-      // Use replace instead of push to ensure a fresh page load
       router.replace("/");
       router.refresh();
     } catch (error) {

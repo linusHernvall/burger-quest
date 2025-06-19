@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import { Button } from "./button";
@@ -27,13 +26,6 @@ export default function BurgerCard({
   isUniqueHighest,
 }: BurgerCardProps) {
   const router = useRouter();
-
-  useEffect(() => {
-    if (isUniqueHighest) {
-      localStorage.setItem("showSheriffModal", "true");
-      localStorage.setItem("burgerName", burger);
-    }
-  }, [isUniqueHighest, burger]);
 
   return (
     <div>
