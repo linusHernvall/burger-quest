@@ -1,10 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 import { Button } from "./button";
-import Image from "next/image";
 
 interface BurgerCardProps {
   id: string;
@@ -25,8 +24,6 @@ export default function BurgerCard({
   isHighestRated,
   isUniqueHighest,
 }: BurgerCardProps) {
-  const router = useRouter();
-
   return (
     <div>
       <div className="relative h-[480px] bg-card-foreground rounded-lg overflow-hidden group">
@@ -40,7 +37,6 @@ export default function BurgerCard({
             className="h-[272px] w-[272px]transition-all duration-500 group-hover:scale-150 lg:sepia lg:group-hover:sepia-0"
             width={272}
             height={272}
-            priority
           />
           {isHighestRated && (
             <div className="absolute top-4 right-4 transform rotate-12 z-20">
@@ -51,7 +47,6 @@ export default function BurgerCard({
                   width={80}
                   height={80}
                   className="h-[80px] w-[80px] drop-shadow-lg"
-                  priority
                 />
               ) : (
                 <Image
@@ -60,7 +55,6 @@ export default function BurgerCard({
                   width={80}
                   height={80}
                   className="h-[80px] w-[80px] drop-shadow-lg"
-                  priority
                 />
               )}
             </div>

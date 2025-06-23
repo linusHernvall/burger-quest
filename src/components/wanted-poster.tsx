@@ -20,7 +20,6 @@ interface WantedPosterProps {
 export function WantedPoster({
   burgerName,
   restaurant,
-  createdAt,
   imageUrl,
   description,
   rating,

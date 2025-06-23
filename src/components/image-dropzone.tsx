@@ -3,6 +3,7 @@
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface ImageDropzoneProps {
   onChange: (file: File) => void;
@@ -55,10 +56,13 @@ export function ImageDropzone({
       <input {...getInputProps()} />
       {preview ? (
         <div className="space-y-2">
-          <img
+          <Image
             src={preview}
             alt="Preview"
-            className="max-h-48 mx-auto rounded-lg object-contain"
+            width={160}
+            height={160}
+            className="w-auto h-auto max-h-48 mx-auto rounded-lg object-contain"
+            priority
           />
           <p>Klicka eller dra för att ersätta bilden</p>
         </div>

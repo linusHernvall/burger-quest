@@ -1,6 +1,4 @@
-import Image from "next/image";
 import { supabase } from "@/backend/supabase/client";
-import { AdminActions } from "@/components/admin-actions";
 import { WantedPoster } from "@/components/wanted-poster";
 
 interface BurgerPageProps {

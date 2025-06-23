@@ -89,7 +89,7 @@ export default function EditBurger({ params }: PageProps) {
       const fileExt = file.name.split(".").pop();
       const fileName = `${Math.random()}.${fileExt}`;
 
-      const { data, error: uploadError } = await supabase.storage
+      const { error: uploadError } = await supabase.storage
         .from("burger-images")
         .upload(fileName, file, {
           cacheControl: "3600",

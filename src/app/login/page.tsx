@@ -27,7 +27,7 @@ export default function LoginPage() {
       } else {
         toast.error("Ogiltligt lösenord");
       }
-    } catch (error) {
+    } catch {
       toast.error("Ett fel uppstod under inloggningen");
     } finally {
       setIsLoading(false);
