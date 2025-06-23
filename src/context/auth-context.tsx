@@ -27,10 +27,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
 
       if (response.ok) {
-        setIsAuthenticated(true);
+        const data = await response.json();
+        setIsAuthenticated(data.authenticated === true);
+      } else {
+        setIsAuthenticated(false);
       }
     } catch (error) {
       console.error("Error checking auth status:", error);
+      setIsAuthenticated(false);
     } finally {
       setIsLoading(false);
     }
