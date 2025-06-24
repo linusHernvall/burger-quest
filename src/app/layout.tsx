@@ -10,12 +10,16 @@ const rye = Rye({
   variable: "--font-rye",
   subsets: ["latin"],
   weight: "400",
+  display: "swap",
+  preload: true,
 });
 
 const specialElite = Special_Elite({
   variable: "--font-special-elite",
   subsets: ["latin"],
   weight: "400",
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {

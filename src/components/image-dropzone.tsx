@@ -62,7 +62,6 @@ export function ImageDropzone({
             width={160}
             height={160}
             className="w-auto h-auto max-h-48 mx-auto rounded-lg object-contain"
-            priority
           />
           <p>Klicka eller dra för att ersätta bilden</p>
         </div>
