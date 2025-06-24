@@ -49,30 +49,22 @@ export default function AddBurger() {
         throw new Error("File size too large. Maximum size is 5MB.");
       }
 
-      const fileExt = file.name.split(".").pop();
-      const fileName = `${Math.random()}.${fileExt}`;
+      // Upload via server-side API route
+      const formData = new FormData();
+      formData.append("file", file);
 
-      const { error: uploadError } = await supabase.storage
-        .from("burger-images")
-        .upload(fileName, file, {
-          cacheControl: "3600",
-          upsert: false,
-        });
+      const response = await fetch("/api/upload-image", {
+        method: "POST",
+        body: formData,
+      });
 
-      if (uploadError) {
-        if (uploadError.message.includes("Bucket not found")) {
-          throw new Error(
-            "Storage bucket not configured. Please contact support."
-          );
-        }
-        throw uploadError;
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to upload image");
       }
 
-      const {
-        data: { publicUrl },
-      } = supabase.storage.from("burger-images").getPublicUrl(fileName);
-
-      return publicUrl;
+      const { url } = await response.json();
+      return url;
     } catch (error) {
       console.error("Error uploading image:", error);
       throw error;
