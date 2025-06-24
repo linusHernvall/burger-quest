@@ -96,23 +96,13 @@ export default function AddBurger() {
         }
       }
 
-      // Get current user
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (!user) {
-        toast.error("You must be logged in to post a burger review");
-        return;
-      }
-
-      // Create burger post
+      // Create burger post (no user_id needed since we're using admin auth)
       const { error: insertError } = await supabase.from("burgers").insert({
         burger_name: burgerName,
         restaurant,
         rating,
         content,
         image_url: imageUrl,
-        user_id: user.id,
       });
 
       if (insertError) throw insertError;

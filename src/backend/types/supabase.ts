@@ -28,7 +28,7 @@ export interface Database {
           rating: number;
           content: string;
           image_url?: string | null;
-          user_id: string;
+          user_id?: string;
         };
         Update: {
           id?: string;
