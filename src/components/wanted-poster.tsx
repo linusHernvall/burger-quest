@@ -39,7 +39,7 @@ export function WantedPoster({
           <h1 className="text-2xl md:text-5xl text-center">
             {burgerName.toUpperCase()}
           </h1>
-          <div className="absolute top-15 right-8 sm:right-18 md:top-20 lg:right-14">
+          <div className="absolute top-8 right-8 sm:right-18 md:top-10 lg:right-14">
             {isAuthenticated && (
               <AdminBurgerMenu burgerId={burgerId} burgerName={burgerName} />
             )}
