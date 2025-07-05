@@ -74,38 +74,32 @@ export function WantedPoster({
               />
             </div>
             {isHighestRated && (
-              <div className="absolute top-0 right-0 sm:top-0 sm:right-16 transform rotate-12 z-20">
+              <div className="absolute top-0 right-4 sm:top-0 sm:right-16 transform rotate-12 z-20">
                 <Image
                   src={isUniqueHighest ? "/sheriff.png" : "/deputy.png"}
                   alt={isUniqueHighest ? "Sheriff badge" : "Deputy badge"}
                   width={64}
                   height={64}
-                  className="drop-shadow-lg sm:w-24 sm:h-24"
+                  className="drop-shadow-lg w-16 h-16 sm:w-30 sm:h-30"
                 />
               </div>
             )}
           </div>
         </div>
-        {/* <div className="flex flex-col items-center w-full px-6">
-        <p
-          className="text-xl sm:text-4xl md:text-3xl mb-2 text-center"
-          style={{ fontFamily: "var(--font-rye)" }}
-        >
-          Beskrivning
-        </p>
-        <p className="text-base text-center mb-8 px-8">{description}</p>
-      </div> */}
+
         <div className="flex flex-col items-center w-full px-6 pb-16 md:pb-20">
           <p className="text-lg sm:text-2xl md:text-3xl">Betyg</p>
           <p className="text-xl sm:text-3xl md:text-4xl">★ {rating} av 10 ★</p>
         </div>
       </div>
 
-      <div className="flex flex-col items-center mt-10">
+      <div className="flex flex-col items-center mt-10 bg-background/60 p-4 rounded-lg">
         <p className="text-xl sm:text-4xl md:text-3xl mb-2 text-center ">
           Beskrivning
         </p>
-        <p className="text-base text-center max-w-152">{description}</p>
+        <p className="text-base text-center max-w-152 whitespace-pre-wrap">
+          {description}
+        </p>
       </div>
     </div>
   );
