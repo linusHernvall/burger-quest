@@ -64,7 +64,7 @@ export function WantedPoster({
         </div>
         <div className="flex flex-col items-center w-full px-6">
           <div className="relative w-full flex justify-center">
-            <div className="relative w-64 h-40 sm:w-120 sm:h-96 lg:w-160 lg:h-128">
+            <div className="relative w-64 h-64 sm:w-120 sm:h-96 lg:w-160 lg:h-128">
               <Image
                 src={imageUrl}
                 alt={`Burger: ${burgerName}`}
