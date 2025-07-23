@@ -149,28 +149,34 @@ export default function EditBurger({ params }: PageProps) {
 
       if (updateError) throw updateError;
 
-      // Check if this burger is now the highest rated
-      const { data: allBurgers } = await supabase
-        .from("burgers")
-        .select("*")
-        .order("rating", { ascending: false });
+      // Check if sheriff modal should be shown
+      if (burger && rating !== burger.rating) {
+        // Get all burgers to determine the new highest rated
+        const { data: allBurgers } = await supabase
+          .from("burgers")
+          .select("*")
+          .order("rating", { ascending: false });
 
-      if (allBurgers && allBurgers.length > 0) {
-        const highestRating = allBurgers[0].rating;
-        const highestRatedBurgers = allBurgers.filter(
-          (b) => b.rating === highestRating
-        );
-        const isUniqueHighest = highestRatedBurgers.length === 1;
+        if (allBurgers && allBurgers.length > 0) {
+          const highestRating = allBurgers[0].rating;
+          const highestRatedBurgers = allBurgers.filter(
+            (b) => b.rating === highestRating
+          );
+          const isUniqueHighest = highestRatedBurgers.length === 1;
 
-        // Only show modal if the rating actually changed and there's a new highest rated burger
-        if (burger && rating !== burger.rating) {
-          // If this burger is now the highest rated
+          // Case 1: This burger is now the highest rated (and it's unique)
           if (rating === highestRating && isUniqueHighest) {
             localStorage.setItem("showSheriffModal", "true");
             localStorage.setItem("burgerName", burgerName);
           }
-          // If this burger's rating was lowered and another burger is now the highest rated
-          else if (rating < burger.rating && highestRatedBurgers.length === 1) {
+          // Case 2: This burger was previously the highest rated, got lowered,
+          // and now there's a new unique highest rated burger
+          else if (
+            burger.rating === highestRating &&
+            rating < burger.rating &&
+            isUniqueHighest &&
+            highestRatedBurgers[0].id !== burger.id
+          ) {
             const newHighestBurger = highestRatedBurgers[0];
             localStorage.setItem("showSheriffModal", "true");
             localStorage.setItem("burgerName", newHighestBurger.burger_name);
@@ -180,7 +186,6 @@ export default function EditBurger({ params }: PageProps) {
 
       toast.success(`${burgerName} uppdaterades framgångsrikt!`);
 
-      // Add a small delay to ensure localStorage is set before navigation
       await new Promise((resolve) => setTimeout(resolve, 100));
 
       router.replace("/");
