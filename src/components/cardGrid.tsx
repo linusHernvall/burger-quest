@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { supabase } from "@/backend/supabase/client";
 import BurgerCard from "./burgerCard";
 
@@ -76,17 +77,42 @@ async function getBurgers(retryCount = 3): Promise<GetBurgersResult> {
 export default function CardGrid() {
   const [result, setResult] = useState<GetBurgersResult>({});
   const [isLoading, setIsLoading] = useState(true);
+  const [refreshKey, setRefreshKey] = useState(0);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const fetchBurgers = async () => {
+    setIsLoading(true);
+    const data = await getBurgers();
+    setResult(data);
+    setIsLoading(false);
+  };
 
   useEffect(() => {
-    const fetchBurgers = async () => {
-      setIsLoading(true);
-      const data = await getBurgers();
-      setResult(data);
-      setIsLoading(false);
+    fetchBurgers();
+  }, [refreshKey]);
+
+  // Refetch data when the component becomes visible again
+  useEffect(() => {
+    const handleFocus = () => {
+      setRefreshKey((prev) => prev + 1);
     };
 
-    fetchBurgers();
+    window.addEventListener("focus", handleFocus);
+    return () => window.removeEventListener("focus", handleFocus);
   }, []);
+
+  // Refetch data when refresh parameter is present in URL
+  useEffect(() => {
+    const refreshParam = searchParams.get("refresh");
+    if (refreshParam) {
+      setRefreshKey((prev) => prev + 1);
+      // Clean up the URL parameter
+      const url = new URL(window.location.href);
+      url.searchParams.delete("refresh");
+      router.replace(url.pathname, { scroll: false });
+    }
+  }, [searchParams, router]);
 
   if (isLoading) {
     return (

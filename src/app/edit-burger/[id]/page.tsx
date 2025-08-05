@@ -186,10 +186,11 @@ export default function EditBurger({ params }: PageProps) {
 
       toast.success(`${burgerName} uppdaterades framgångsrikt!`);
 
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      // Force a longer delay to ensure the database update is propagated
+      await new Promise((resolve) => setTimeout(resolve, 500));
 
-      router.replace("/");
-      router.refresh();
+      // Navigate back to home page with a timestamp to force refresh
+      router.push(`/?refresh=${Date.now()}`);
     } catch (error) {
       console.error("Error updating burger:", error);
       toast.error("Misslyckades att uppdatera hamburgaren. Försök igen.");
