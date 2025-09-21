@@ -89,7 +89,9 @@ export function WantedPoster({
 
         <div className="flex flex-col items-center w-full px-6 pb-16 md:pb-20">
           <p className="text-lg sm:text-2xl md:text-3xl">Betyg</p>
-          <p className="text-xl sm:text-3xl md:text-4xl">★ {rating} av 10 ★</p>
+          <p className="text-xl sm:text-3xl md:text-4xl">
+            ★ {rating % 1 === 0 ? rating.toFixed(0) : rating.toFixed(1)} av 10 ★
+          </p>
         </div>
       </div>
 

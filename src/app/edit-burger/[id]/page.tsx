@@ -11,6 +11,7 @@ import { Button } from "@/components/button";
 import { Input } from "@/components/input";
 import { ImageDropzone } from "@/components/image-dropzone";
 import { Textarea } from "@/components/textarea";
+import { RatingInput } from "@/components/rating-input";
 
 interface Burger {
   id: string;
@@ -116,8 +117,25 @@ export default function EditBurger({ params }: PageProps) {
       const formData = new FormData(e.target as HTMLFormElement);
       const burgerName = formData.get("burgerName") as string;
       const restaurant = formData.get("restaurant") as string;
-      const rating = parseInt(formData.get("rating") as string, 10);
+      const ratingString = formData.get("rating_decimal") as string;
+      const rating = parseFloat(ratingString);
       const content = formData.get("content") as string;
+
+      // Validate rating is within valid range
+      if (isNaN(rating) || rating < 1 || rating > 10) {
+        toast.error("Betyget måste vara mellan 1 och 10");
+        return;
+      }
+
+      // Check if rating is a valid decimal
+      // if (ratingString && ratingString.includes(".")) {
+      //   console.log(
+      //     "Decimal rating detected:",
+      //     ratingString,
+      //     "parsed as:",
+      //     rating
+      //   );
+      // }
 
       let imageUrl = burger?.image_url;
 
@@ -135,19 +153,29 @@ export default function EditBurger({ params }: PageProps) {
         }
       }
 
-      // Update burger in database
+      const roundedRating = Math.round(rating * 10) / 10; // Round to 1 decimal place
+      // console.log("Original rating:", rating, "Rounded rating:", roundedRating);
+
       const { error: updateError } = await supabase
         .from("burgers")
         .update({
           burger_name: burgerName,
           restaurant,
-          rating,
+          rating: roundedRating,
           content,
           image_url: imageUrl,
         })
         .eq("id", id);
 
-      if (updateError) throw updateError;
+      if (updateError) {
+        console.error("Supabase update error:", updateError);
+        console.error("Error details:", JSON.stringify(updateError, null, 2));
+        console.error("Error message:", updateError.message);
+        console.error("Error code:", updateError.code);
+        console.error("Error details:", updateError.details);
+        console.error("Error hint:", updateError.hint);
+        throw updateError;
+      }
 
       // Check if sheriff modal should be shown
       if (burger && rating !== burger.rating) {
@@ -193,6 +221,10 @@ export default function EditBurger({ params }: PageProps) {
       router.push(`/?refresh=${Date.now()}`);
     } catch (error) {
       console.error("Error updating burger:", error);
+      if (error instanceof Error) {
+        console.error("Error message:", error.message);
+        console.error("Error stack:", error.stack);
+      }
       toast.error("Misslyckades att uppdatera hamburgaren. Försök igen.");
     } finally {
       setIsSubmitting(false);
@@ -233,12 +265,9 @@ export default function EditBurger({ params }: PageProps) {
           defaultValue={burger.restaurant}
           required
         />
-        <Input
-          type="number"
+        <RatingInput
           name="rating"
-          min={1}
-          max={10}
-          placeholder="Betyg"
+          placeholder="Betyg (1-10)"
           defaultValue={burger.rating}
           required
         />

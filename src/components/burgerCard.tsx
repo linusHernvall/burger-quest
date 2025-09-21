@@ -67,7 +67,7 @@ export default function BurgerCard({
           </p>
           <p className="text-white text-lg tracking-wider">{restaurant}</p>
           <p className="text-white text-2xl font-bold tracking-wider pt-2">
-            {rating}/10
+            {rating % 1 === 0 ? rating.toFixed(0) : rating.toFixed(1)}/10
           </p>
           <Link href={`/burger/${id}`}>
             <Button className="relative cursor-pointer mt-4 top-0 opacity-100 px-[32px] py-[16px] no-underline rounded-lg tracking-wider transition-all duration-500 lg:top-[100px] lg:group-hover:top-0 lg:group-hover:opacity-100">

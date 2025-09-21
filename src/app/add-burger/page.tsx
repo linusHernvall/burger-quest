@@ -10,6 +10,7 @@ import { Button } from "@/components/button";
 import { Input } from "@/components/input";
 import { ImageDropzone } from "@/components/image-dropzone";
 import { Textarea } from "@/components/textarea";
+import { RatingInput } from "@/components/rating-input";
 
 export default function AddBurger() {
   const { isAuthenticated } = useAuth();
@@ -79,8 +80,15 @@ export default function AddBurger() {
       const formData = new FormData(e.target as HTMLFormElement);
       const burgerName = formData.get("burgerName") as string;
       const restaurant = formData.get("restaurant") as string;
-      const rating = parseInt(formData.get("rating") as string, 10);
+      const ratingString = formData.get("rating_decimal") as string;
+      const rating = parseFloat(ratingString);
       const content = formData.get("content") as string;
+
+      // Validate rating is within valid range
+      if (isNaN(rating) || rating < 1 || rating > 10) {
+        toast.error("Betyget måste vara mellan 1 och 10");
+        return;
+      }
 
       let imageUrl = null;
 
@@ -96,16 +104,26 @@ export default function AddBurger() {
         }
       }
 
-      // Create burger post (no user_id needed since we're using admin auth)
+      const roundedRating = Math.round(rating * 10) / 10;
+      // console.log("Original rating:", rating, "Rounded rating:", roundedRating);
+
       const { error: insertError } = await supabase.from("burgers").insert({
         burger_name: burgerName,
         restaurant,
-        rating,
+        rating: roundedRating,
         content,
         image_url: imageUrl,
       });
 
-      if (insertError) throw insertError;
+      if (insertError) {
+        console.error("Supabase insert error:", insertError);
+        console.error("Error details:", JSON.stringify(insertError, null, 2));
+        console.error("Error message:", insertError.message);
+        console.error("Error code:", insertError.code);
+        console.error("Error details:", insertError.details);
+        console.error("Error hint:", insertError.hint);
+        throw insertError;
+      }
 
       router.push(
         `/?success=true&burgerName=${encodeURIComponent(burgerName)}`
@@ -137,14 +155,7 @@ export default function AddBurger() {
           placeholder="Restaurang"
           required
         />
-        <Input
-          type="number"
-          name="rating"
-          min={1}
-          max={10}
-          placeholder="Betyg"
-          required
-        />
+        <RatingInput name="rating" placeholder="Betyg (1-10)" required />
         <ImageDropzone
           onChange={(file) => setSelectedImage(file)}
           className="w-full"
